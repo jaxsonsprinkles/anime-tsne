@@ -18,7 +18,9 @@ def update_view(x,y):
 df = pd.read_csv("data.csv").dropna(subset=['title_english', 'synopsis'])
 df['synopsis'] = df['synopsis'].apply(lambda x: wrap_text(x))
 df_copy = df.copy()
-st.title("Anime Search and Visualizer")
+
+st.title("Anime Visualizer")
+st.set_page_config(page_title="Anime Visualizer")
 
 fig = px.scatter(df_copy, x="x", y="y", hover_name="title_english", hover_data={"title_english": True, "x": False, "y": False})
 if st.session_state.x_range and st.session_state.y_range:
@@ -47,5 +49,5 @@ fig.update_traces(
     customdata=df_copy[['synopsis']]
 )
 
-st.plotly_chart(fig, width="stretch")
 
+st.plotly_chart(fig, width="stretch")
